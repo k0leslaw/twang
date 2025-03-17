@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function AddSongPage () {
     const navigate = useNavigate();
 
     const [title, setTitle] = useState('');
     const [artist, setArtist] = useState('');
-    const [learned, setLearned] = useState('');
+    const [learned, setLearned] = useState(true);
 
     const addSong = async () => {
         const newSong = { title, artist, learned };
@@ -23,7 +24,11 @@ function AddSongPage () {
             alert("Failed to add the song, status code " + response.status)
         }
 
-        navigate('/');
+        navigate('/song-library');
+    }
+
+    const cancel = async () => {
+        navigate('/song-library');
     }
 
     return (
@@ -41,13 +46,13 @@ function AddSongPage () {
                 value={artist}
                 onChange={e => setArtist(e.target.value)} />
             <br/>
-            <input 
-                type="boolean"
-                placeholder="true"
-                value={learned}
-                onChange={e => setLearned(e.target.value)} />
+            <select onChange={e => setLearned(e.target.value === "true")}>
+                <option value={true}>Learned</option>
+                <option value={false}>Not learned</option>
+            </select>
             <br/>
-            <button onClick={addExercise}>Add</button>
+            <button onClick={cancel}>Cancel</button>
+            <button onClick={addSong}>Add</button>
         </div>
     );
 }

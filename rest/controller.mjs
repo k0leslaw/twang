@@ -2,7 +2,8 @@ import 'dotenv/config';
 import express, { response } from 'express';
 import asyncHandler from 'express-async-handler';
 
-import * as songs from './model.mjs'
+import * as songs from './model.mjs';
+import router from './spotify_controller.mjs';
 
 const app = express();
 app.use(express.json());
@@ -14,13 +15,17 @@ app.listen(PORT, async () => {
     console.log(`Server listening on port ${PORT}...`)
 });
 
+/**
+ * Guitar Companion Requests
+ */
+
 app.post("/songs", asyncHandler(async (req, res) => {
     const { title, artist, learned } = req.body
 
     if (
         typeof title !== 'string' ||
         typeof artist !== 'string' ||
-        typeof learned !== 'boolean'
+        typeof learned !== 'string'
     ) {
         res.status(400).json({ Error: "Invalid request" });
     } else {
@@ -55,7 +60,7 @@ app.put("/songs/:_id", asyncHandler(async (req, res) => {
     if (
         typeof title !== 'string' ||
         typeof artist !== 'string' ||
-        typeof learned !== 'boolean'
+        typeof learned !== 'string'
     ) {
         res.status(400).json({ Error: "Invalid request" });
     } else {
@@ -80,3 +85,5 @@ app.delete("/songs/:_id", asyncHandler(async (req, res) => {
         res.status(404).json({ Error: "Not found" });
     }
 }));
+
+export default { app }

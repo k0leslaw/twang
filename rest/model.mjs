@@ -30,7 +30,7 @@ function createModel() {
     const songSchema = mongoose.Schema({
         title: {type: String, required: true},
         artist: {type: String, required: true},
-        learned: {type: Boolean, required: true},
+        learned: {type: String, required: true},
     });
     return mongoose.model(SONG_CLASS, songSchema);
 }

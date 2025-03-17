@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function EditSongPage ({ songToEdit }) {
@@ -7,6 +7,12 @@ function EditSongPage ({ songToEdit }) {
     const [learned, setLearned] = useState(songToEdit.learned);
     
     const navigate = useNavigate();
+
+    useEffect( () => {
+        setTitle(songToEdit.title);
+        setArtist(songToEdit.artist);
+        setLearned(songToEdit.learned);
+    }, [songToEdit]);
 
     const editSong = async () => {
         const updatedSong = { title, artist, learned };
@@ -50,20 +56,21 @@ function EditSongPage ({ songToEdit }) {
             <input 
                 type="text"
                 placeholder="Title"
-                value={title}
+                value={ title }
                 readOnly
-                onChange={e => setTitle(e.target.value)} />
+                onChange={ e => setTitle(e.target.value) } />
             <br/>
             <input 
                 type="text"
                 placeholder="Artist"
-                value={artist}
+                value={ artist }
                 readOnly
                 onChange={e => setArtist(e.target.value)} />
             <br/>
-            <select onChange={e => setLearned(e.target.value === "true")}>
-                <option value={true}>Learned</option>
-                <option value={false}>Not learned</option>
+            <select value={ learned } onChange={ e => setLearned(e.target.value) }>
+                <option value={'learned'}>Learned</option>
+                <option value={'not learned'}>Not learned</option>
+                <option value={'in progress'}>In progress</option>
             </select>
             <br/>
 

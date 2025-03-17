@@ -1,7 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import AddSongPage from "../AddSongPage/AddSongPage";
 import SongLibraryItem from "../../components/SongLibraryItem/SongLibraryItem";
 
 function SongLibraryPage ({ setSongToEdit }) {
@@ -35,8 +34,9 @@ function SongLibraryPage ({ setSongToEdit }) {
         <div>
             <h2>Song Library</h2>
 
-            <button onClick={e => { e.preventDefault(); setFilter(true) }}>Learned</button>
-            <button onClick={e => { e.preventDefault(); setFilter(false) }}>Not Learned</button>
+            <button onClick={e => { e.preventDefault(); setFilter('learned') }}>Learned</button>
+            <button onClick={e => { e.preventDefault(); setFilter('not learned') }}>Not Learned</button>
+            <button onClick={e => { e.preventDefault(); setFilter('in progress') }}>In progress</button>
             <button onClick={e => { e.preventDefault(); setFilter(null) }}>All Songs</button>
 
             

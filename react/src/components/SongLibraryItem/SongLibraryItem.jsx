@@ -6,6 +6,7 @@ function SongLibraryItem ({ song, onEdit }) {
 
     return (
         <div>
+            <img src={song.image} width="64"/>
             <button onClick={() => onEdit(song)}>Edit</button>
             { song.title }
             <br/>

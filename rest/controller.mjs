@@ -3,24 +3,40 @@ import express, { response } from 'express';
 import asyncHandler from 'express-async-handler';
 
 import * as songs from './model.mjs';
-import router from './spotify_controller.mjs';
 
 const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT;
 
+let spotify_token = null;
+
+/**
+ * Fetch Spotify API token
+ */
+async function refreshSpotifyToken() {
+    spotify_token = await songs.getSpotifyToken();
+    if (spotify_token) {
+        console.log("Spotify API token retrieved");
+    } else {
+        console.error("Failed to fetch Spotify API token");
+    }
+}
+
+/**
+ * Connect to MongoDB
+ */
 app.listen(PORT, async () => {
     await songs.connect(false)
+    await refreshSpotifyToken();
     console.log(`Server listening on port ${PORT}...`)
 });
 
 /**
- * Guitar Companion Requests
+ * Guitar Companion Calls
  */
-
 app.post("/songs", asyncHandler(async (req, res) => {
-    const { title, artist, learned } = req.body
+    const { title, artist, image, learned } = req.body
 
     if (
         typeof title !== 'string' ||
@@ -29,7 +45,7 @@ app.post("/songs", asyncHandler(async (req, res) => {
     ) {
         res.status(400).json({ Error: "Invalid request" });
     } else {
-        const newSong = await songs.createSong(title, artist, learned);
+        const newSong = await songs.createSong(title, artist, image, learned);
         res.status(201).json(newSong);
     }
 
@@ -83,6 +99,26 @@ app.delete("/songs/:_id", asyncHandler(async (req, res) => {
         res.status(204).send();
     } else {
         res.status(404).json({ Error: "Not found" });
+    }
+}));
+
+/**
+ * Spotify API Calls
+ */
+
+app.get("/spotify/search", asyncHandler(async (req, res) => {
+    const { query, type } = req.query;
+
+    if (!query || !type) {
+        return res.status(400).json({ Error: "Missing query or type parameter" });
+    }
+
+    try {
+        const result = await songs.searchSpotify(query, type);
+        res.status(200).json(result);
+    } catch (error) {
+        console.error("Spotify API Error:", error);
+        res.status(500).json({ Error: "Failed to fetch data from Spotify" });
     }
 }));
 

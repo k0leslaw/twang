@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import SearchSongItem from "../../components/SearchSongItem/SearchSongItem";
+import AddSongPage from "../../pages/AddSongPage/AddSongPage";
 
-function AddSongPage () {
+function SearchSongItem () {
     const navigate = useNavigate();
 
     const [searchQuery, setSearchQuery] = useState('');
@@ -56,21 +56,37 @@ function AddSongPage () {
         } else {
             alert("Failed to add the song, status code " + response.status)
         }
-
-        navigate('/song-library');
-    }
-
-    const back = async () => {
-        navigate('/song-library');
     }
 
     return (
         <div>
-            <h2>Add Song</h2>
-            <SearchSongItem />
-            <button onClick={back}>Back</button>
+            <input 
+                type="text"
+                placeholder="Search for a song..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)} />
+            <button onClick={searchSpotify}>Search</button>
+            <br/>
+
+            {searchResults.length > 0 && (
+                <ul>
+                    {searchResults.map(song => (
+                        <li key={song.id} onClick={() => handleSelectSong(song)}>
+                            {song.name} - {song.artists.map(artist => artist.name).join(", ")}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        
+            <select value={ learned } onChange={e => setLearned(e.target.value)}>
+                <option value={'learned'}>Learned</option>
+                <option value={'not learned'}>Not learned</option>
+                <option value={'in progress'}>In progress</option>
+            </select>
+            <br/>
+            <button onClick={addSong}>Add</button>
         </div>
     );
 }
 
-export default AddSongPage;
+export default SearchSongItem;

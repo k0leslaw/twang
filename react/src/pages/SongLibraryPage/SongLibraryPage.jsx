@@ -5,18 +5,18 @@ import SongLibraryItem from "../../components/SongLibraryItem/SongLibraryItem";
 
 function SongLibraryPage ({ setSongToEdit }) {
     const [songs, setSongs] = useState([]);
-    const [filter, setFilter] = useState(null);
+    const [filters, setFilters] = useState(null);
 
     const navigate = useNavigate();
 
     useEffect ( () => {
         loadSongs();
-    }, [filter]);
+    }, [filters]);
 
     const loadSongs = async () => {
         let url = '/songs';
-        if (filter !== null) {
-            url = `/songs?learned=${filter}`;
+        if (filters !== null) {
+            url = `/songs?learned=${filters}`;
         }
 
         const res = await fetch(url);
@@ -34,10 +34,10 @@ function SongLibraryPage ({ setSongToEdit }) {
         <div>
             <h2>Song Library</h2>
 
-            <button onClick={e => { e.preventDefault(); setFilter('learned') }}>Learned</button>
-            <button onClick={e => { e.preventDefault(); setFilter('not learned') }}>Not Learned</button>
-            <button onClick={e => { e.preventDefault(); setFilter('in progress') }}>In progress</button>
-            <button onClick={e => { e.preventDefault(); setFilter(null) }}>All Songs</button>
+            <button onClick={e => { e.preventDefault(); setFilters('learned') }}>Learned</button>
+            <button onClick={e => { e.preventDefault(); setFilters('not learned') }}>Not Learned</button>
+            <button onClick={e => { e.preventDefault(); setFilters('in progress') }}>In progress</button>
+            <button onClick={e => { e.preventDefault(); setFilters(null) }}>All Songs</button>
 
             
             <Link to="add-song">

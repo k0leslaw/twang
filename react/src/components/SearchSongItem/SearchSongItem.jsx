@@ -1,10 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import AddSongPage from "../../pages/AddSongPage/AddSongPage";
-
 function SearchSongItem () {
-    const navigate = useNavigate();
 
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -72,7 +68,7 @@ function SearchSongItem () {
                 <ul>
                     {searchResults.map(song => (
                         <li key={song.id} onClick={() => handleSelectSong(song)}>
-                            {song.name} - {song.artists.map(artist => artist.name).join(", ")}
+                            {<img src={song.album.images[2].url} width="64"/>} {song.name} by {song.artists.map(artist => artist.name).join(", ")}
                         </li>
                     ))}
                 </ul>

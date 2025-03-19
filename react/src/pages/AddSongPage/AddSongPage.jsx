@@ -41,7 +41,7 @@ function AddSongPage () {
         const newSong = {
             title: selectedSong.name,
             artist: selectedSong.artists.map(artist => artist.name).join(", "),
-            image: selectedSong.album.images[0]?.url,
+            image: selectedSong.album.images[2]?.url,
             learned
         }
 

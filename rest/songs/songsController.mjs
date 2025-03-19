@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express, { response } from 'express';
 import asyncHandler from 'express-async-handler';
 
-import * as songs from './model.mjs';
+import * as songs from './songsModel.mjs';
 
 const app = express();
 app.use(express.json());

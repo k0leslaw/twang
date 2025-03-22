@@ -1,41 +1,16 @@
 import 'dotenv/config';
-import express, { response } from 'express';
+import express from 'express';
 import asyncHandler from 'express-async-handler';
 
-import * as songs from './songsModel.mjs';
+import * as songs from '../models/songModel.mjs';
 
-const app = express();
-app.use(express.json());
-
+const router = express.Router();
 const PORT = process.env.PORT;
-
-let spotify_token = null;
-
-/**
- * Fetch Spotify API token
- */
-async function refreshSpotifyToken() {
-    spotify_token = await songs.getSpotifyToken();
-    if (spotify_token) {
-        console.log("Spotify API token retrieved");
-    } else {
-        console.error("Failed to fetch Spotify API token");
-    }
-}
-
-/**
- * Connect to MongoDB
- */
-app.listen(PORT, async () => {
-    await songs.connect(false)
-    await refreshSpotifyToken();
-    console.log(`Server listening on port ${PORT}...`)
-});
 
 /**
  * Guitar Companion Calls
  */
-app.post("/songs", asyncHandler(async (req, res) => {
+router.post("/", asyncHandler(async (req, res) => {
     const { title, artist, image, learned } = req.body
 
     if (
@@ -51,13 +26,13 @@ app.post("/songs", asyncHandler(async (req, res) => {
 
 }));
 
-app.get("/songs", asyncHandler(async (req, res) => {
+router.get("/", asyncHandler(async (req, res) => {
     const filter = req.query;
     const matching_songs = await songs.getSongs(filter);
     res.status(200).json(matching_songs);
 }));
 
-app.get("/songs/:_id", asyncHandler(async (req, res) => {
+router.get("/:_id", asyncHandler(async (req, res) => {
     const { _id } = req.params;
     const song = await songs.getSongById(_id);
     
@@ -68,7 +43,7 @@ app.get("/songs/:_id", asyncHandler(async (req, res) => {
     }
 }));
 
-app.put("/songs/:_id", asyncHandler(async (req, res) => {
+router.put("/:_id", asyncHandler(async (req, res) => {
     const { _id } = req.params;
     const updates = req.body;
     const { title, artist, learned } = updates;
@@ -90,7 +65,7 @@ app.put("/songs/:_id", asyncHandler(async (req, res) => {
     }
 }));
 
-app.delete("/songs/:_id", asyncHandler(async (req, res) => {
+router.delete("/:_id", asyncHandler(async (req, res) => {
     const { _id } = req.params;
     const song = await songs.getSongById(_id);
 
@@ -102,24 +77,4 @@ app.delete("/songs/:_id", asyncHandler(async (req, res) => {
     }
 }));
 
-/**
- * Spotify API Calls
- */
-
-app.get("/spotify/search", asyncHandler(async (req, res) => {
-    const { query, type } = req.query;
-
-    if (!query || !type) {
-        return res.status(400).json({ Error: "Missing query or type parameter" });
-    }
-
-    try {
-        const result = await songs.searchSpotify(query, type);
-        res.status(200).json(result);
-    } catch (error) {
-        console.error("Spotify API Error:", error);
-        res.status(500).json({ Error: "Failed to fetch data from Spotify" });
-    }
-}));
-
-export default { app }
+export default router;

@@ -43,9 +43,7 @@ async function refreshSpotifyToken() {
     }
 }
 
-/**
- * Spotify API Requests
- */
+
 async function searchSpotify(query, type) {
     const token = await getSpotifyToken();
     if (!token) {

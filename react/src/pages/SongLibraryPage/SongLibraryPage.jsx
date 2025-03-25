@@ -1,6 +1,8 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import './SongLibraryPage.css';
+
 import SongLibraryItem from "../../components/SongLibraryItem/SongLibraryItem";
 
 function SongLibraryPage ({ setSongToEdit }) {
@@ -34,17 +36,19 @@ function SongLibraryPage ({ setSongToEdit }) {
         <div>
             <h2>Song Library</h2>
 
-            <button onClick={e => { e.preventDefault(); setFilters('learned') }}>Learned</button>
-            <button onClick={e => { e.preventDefault(); setFilters('not learned') }}>Not Learned</button>
-            <button onClick={e => { e.preventDefault(); setFilters('in progress') }}>In progress</button>
-            <button onClick={e => { e.preventDefault(); setFilters(null) }}>All Songs</button>
+            <button className='song-filter-button' onClick={e => { e.preventDefault(); setFilters('learned') }}>Learned</button>
+            <button className='song-filter-button' onClick={e => { e.preventDefault(); setFilters('not learned') }}>Not Learned</button>
+            <button className='song-filter-button' onClick={e => { e.preventDefault(); setFilters('in progress') }}>In progress</button>
+            <button className='song-filter-button' onClick={e => { e.preventDefault(); setFilters(null) }}>All Songs</button>
 
             
             <Link to="add-song">
                 <button>Add Song</button>
             </Link>
 
-            { songs.map((song, i) => (<SongLibraryItem onEdit={onEdit} song={song} key={i}/>)) }
+            <div id='song-library-container'>
+                { songs.map((song, i) => (<SongLibraryItem onEdit={onEdit} song={song} key={i}/>)) }
+            </div>
         </div>
     );
 }

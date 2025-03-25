@@ -1,0 +1,12 @@
+.song-filter-button {
+    background-color: #697565;
+    color: #1E201E;
+    width: 135px;
+}
+
+#song-library-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 16px;
+    justify-content: center;
+}

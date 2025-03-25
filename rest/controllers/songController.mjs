@@ -1,17 +1,12 @@
-import 'dotenv/config';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 
 import * as songs from '../models/songModel.mjs';
 
 const router = express.Router();
-const PORT = process.env.PORT;
 
-/**
- * Guitar Companion Calls
- */
 router.post("/", asyncHandler(async (req, res) => {
-    const { title, artist, image, learned } = req.body
+    const { title, artist, image, learned } = req.body;
 
     if (
         typeof title !== 'string' ||
@@ -28,8 +23,8 @@ router.post("/", asyncHandler(async (req, res) => {
 
 router.get("/", asyncHandler(async (req, res) => {
     const filter = req.query;
-    const matching_songs = await songs.getSongs(filter);
-    res.status(200).json(matching_songs);
+    const matchingSongs = await songs.getSongs(filter);
+    res.status(200).json(matchingSongs);
 }));
 
 router.get("/:_id", asyncHandler(async (req, res) => {

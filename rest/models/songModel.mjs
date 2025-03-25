@@ -1,16 +1,7 @@
 import mongoose from 'mongoose';
-import 'dotenv/config';
 
-const SONG_DB_NAME = "twang";
-const SONG_COLLECTION = "songs";
-const SONG_CLASS = "song";
-
-let connection = undefined;
 let Song = undefined;
 
-/**
- * Song schema
- */
 function createModel() {
     if (!Song) {
         const songSchema = mongoose.Schema({
@@ -19,16 +10,13 @@ function createModel() {
             image: {type: String, required: true},
             learned: {type: String, required: true}
         });
-        Song = mongoose.model(SONG_CLASS, songSchema);
+        Song = mongoose.model('song', songSchema);
     }
     return Song;
 }
 
 createModel();
 
-/**
- * Guitar Companion API Requests
- */
 
 async function createSong (title, artist, image, learned) {
     const song = new Song({ title: title, artist: artist, image: image, learned: learned });

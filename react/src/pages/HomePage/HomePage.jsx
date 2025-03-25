@@ -8,6 +8,7 @@ function HomePage () {
         <div>
             Home Page
             <Link to='/song-library'>Song Library</Link>
+            <Link to='/practice-log'>Practice Log</Link>
         </div>
     );
 }

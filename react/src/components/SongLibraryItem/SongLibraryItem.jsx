@@ -8,12 +8,11 @@ function SongLibraryItem ({ song, onEdit }) {
 
     return (
         <div className="song-library-item">
-            <img src={song.image} width="64"/>
-    
-            { song.title }
-            { song.artist }
-
-            <button onClick={() => onEdit(song)}>Edit</button>
+            <img  id='song-img' onClick={() => onEdit(song)} src={song.image}/>
+            <span id='song-info-text'>
+                <div id='song-title'>{ song.title }</div>
+                <div id='song-artist'>{ song.artist }</div>
+            </span>
         </div>
     );
 }

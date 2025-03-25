@@ -17,7 +17,7 @@ function createModel () {
     return Routine;
 }
 
-createModel();
+createModel(); 
 
 
 async function createRoutine (title, segments) {

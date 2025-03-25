@@ -6,14 +6,14 @@ import * as spotify from '../models/spotifyModel.mjs';
 const router = express.Router();
 
 router.get("/search", asyncHandler(async (req, res) => {
-    const { query, type } = req.query;
+    const { query, type, limit } = req.query;
 
     if (!query || !type) {
         return res.status(400).json({ Error: "Missing query or type parameter" });
     }
 
     try {
-        const result = await spotify.searchSpotify(query, type);
+        const result = await spotify.searchSpotify(query, type, limit);
         res.status(200).json(result);
     } catch (error) {
         console.error("Spotify API Error:", error);

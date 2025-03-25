@@ -44,7 +44,7 @@ async function refreshSpotifyToken() {
 }
 
 
-async function searchSpotify(query, type) {
+async function searchSpotify(query, type, limit) {
     const token = await getSpotifyToken();
     if (!token) {
         throw new Error("Failed to retrieve Spotify token");
@@ -53,6 +53,7 @@ async function searchSpotify(query, type) {
     const url = new URL("https://api.spotify.com/v1/search");
     url.searchParams.append("q", query);
     url.searchParams.append("type", type);
+    url.searchParams.append("limit", limit);
 
     const response  = await fetch(url, {
         method: "GET",

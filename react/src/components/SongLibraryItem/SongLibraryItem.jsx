@@ -1,10 +1,6 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
 import './SongLibraryItem.css';
 
 function SongLibraryItem ({ song, onEdit }) {
-    const navigate = useNavigate();
 
     return (
         <div className="song-library-item" onClick={() => onEdit(song)}>

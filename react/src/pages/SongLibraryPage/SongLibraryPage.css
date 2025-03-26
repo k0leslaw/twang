@@ -3,18 +3,11 @@ h2 {
     justify-self: left;
 }
 
-footer {
-    border: 2px solid red;
-
-    width: 100%;
-    height: 100px;
-
-    margin-top: auto;
-}
-
 #song-library-page {
     display: flex;
     flex-direction: column;
+
+    min-height: 100vh;
 }
 
 #title-filters-container {
@@ -22,7 +15,7 @@ footer {
     align-items: center;
     justify-content: space-between;
 
-    width: 100%;
+    margin: 0px 25px 0px 25px;
 }
 
 #song-filter-buttons-container {
@@ -50,7 +43,7 @@ footer {
 
 #song-library-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 0px 16px 16px 16px;
     justify-content: center;
 }

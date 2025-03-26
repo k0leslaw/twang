@@ -1,0 +1,91 @@
+#edit-song-page h2{
+    text-align: left;
+    margin-left: 25px;
+}
+
+img {
+    width: 128px;
+    align-self: center;
+}
+
+#options-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: space-between;
+
+    height: 50vh;
+}
+
+#edit-song-page {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
+    color: #ECDFCC;
+}
+
+#edit-options-container {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+#song-info-container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    width: 100vw;
+}
+
+#song-info-container input {
+    background-color: #1E201E;
+    color: #ECDFCC;
+
+    border: none;
+    justify-items: center;
+
+    margin-top: 5px;
+}
+
+#song-info-container input:focus {
+    outline: none;
+    justify-items: center;
+}
+
+#edit-options-container select {
+    background-color: #ECDFCC;
+    color: #1E201E;
+
+    justify-items: center;
+    text-align: center;
+
+    font-size: 16px;
+
+    margin-top: 5px;
+}
+
+
+#title {
+    font-size: 32px;;
+}
+
+#artist {
+    font-size: 24px;
+}
+
+#buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 250px;
+}
+
+#delete-button {
+    background-color: #832232;
+}

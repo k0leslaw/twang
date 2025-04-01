@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import SearchResultsItem from "../../components/SearchResultsItem/SearchResultsItem";
+import './AddSongPage.css';
+import SearchResultsItem from '../../../components/SearchResultsItem/SearchResultsItem.jsx';
 
 function AddSongPage () {
     const navigate = useNavigate();
@@ -65,35 +66,41 @@ function AddSongPage () {
 
     return (
         
-        <div>
-            <h2>Add Song</h2>
-            <div>
-                <input 
-                    type='number'
-                    value={songLimit}
-                    onChange={e => setSongLimit(e.target.valueAsNumber)} />
-                <input 
-                    type="text"
-                    placeholder="Search for a song..."
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)} />
-                <button onClick={searchSpotify}>Search</button>
-                <br/>
-
-                <SearchResultsItem searchResults={searchResults} handleSelectSong={handleSelectSong}/>
-            
-                <select value={ learned } onChange={e => setLearned(e.target.value)}>
-                    <option value={'learned'}>Learned</option>
-                    <option value={'not learned'}>Not learned</option>
-                    <option value={'in progress'}>In progress</option>
-                </select>
-                <br/>
-                <button onClick={addSong}>Add</button>
+        <div id='add-song-page'>
+            <div id='title-search-bar-container'>
+                <h2>Add Song</h2>
+                <div>
+                    <input 
+                        type="text"
+                        placeholder="Search for a song..."
+                        value={searchQuery}
+                        onChange={e => setSearchQuery(e.target.value)} />
+                    <input 
+                        type='number'
+                        value={songLimit}
+                        onChange={e => setSongLimit(e.target.valueAsNumber)} />
+                </div>
             </div>
 
-            
-            
-            <button onClick={back}>Back</button>
+            <button onClick={searchSpotify}>Search</button>
+
+            <div id='back-results-container'>
+                <button onClick={back}>Back</button>
+                <div id='search-results-selector-container'>
+                    <SearchResultsItem searchResults={searchResults} handleSelectSong={handleSelectSong}/>
+
+                    <div>
+                        <select value={ learned } onChange={e => setLearned(e.target.value)}>
+                            <option value={'learned'}>Learned</option>
+                            <option value={'not learned'}>Not learned</option>
+                            <option value={'in progress'}>In progress</option>
+                        </select>
+
+                        <button onClick={addSong}>Add</button>
+                    </div>
+                </div>
+                
+            </div>   
         </div>
     );
 }

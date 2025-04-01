@@ -4,7 +4,7 @@ import { HiPlusCircle } from "react-icons/hi";
 
 import './SongLibraryPage.css';
 
-import SongLibraryItem from "../../components/SongLibraryItem/SongLibraryItem";
+import SongLibraryItem from "../../../components/SongLibraryItem/SongLibraryItem";
 
 function SongLibraryPage ({ setSongToEdit }) {
     const [songs, setSongs] = useState([]);

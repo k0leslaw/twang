@@ -1,8 +1,9 @@
 import SearchResultSongItem from "../SearchResultSongItem/SearchResultSongItem";
+import './SearchResultsItem.css'
 
 function SearchResultsItem ({ searchResults, handleSelectSong }) {
     return (
-        <div>
+        <div id='search-results-item'>
             {searchResults.length > 0 && (
                 <ul>
                     {searchResults.map(song => (

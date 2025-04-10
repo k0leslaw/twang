@@ -7,9 +7,8 @@ const router = express.Router();
 
 router.post('/', asyncHandler(async (req, res) => {
     const { date, time, routine, fun, development, notes } = req.body;
-
     if (
-        typeof date !== 'string' ||
+        !sessions.isDateValid(date) ||
         !Number.isInteger(time) || time < 5 ||
         typeof routine !== 'string' ||
         !Number.isInteger(fun) || !(fun >= 0 ) || !(fun <= 10) ||
@@ -49,7 +48,7 @@ router.put('/:_id', asyncHandler(async (req, res) => {
     if (!session) {
         res.status(404).json({ Error: 'Not found' })
     } else if (
-        typeof date !== 'string' ||
+        !sessions.isDateValid(date) ||
         !Number.isInteger(time) || time < 5 ||
         typeof routine !== 'string' ||
         !Number.isInteger(fun) || !(fun >= 0 ) || !(fun <= 10) ||

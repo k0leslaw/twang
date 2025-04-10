@@ -18,6 +18,11 @@ function createModel() {
 
 createModel();
 
+function isDateValid(date) {
+    const format = /^\d\d-\d\d-\d\d$/;
+    return format.test(date);
+}
+
 async function createSession (date, time, routine, fun, development, notes) {
     const session = new Session({date: date, time: time, routine: routine, fun: fun, development: development, notes: notes});
     return session.save();
@@ -47,4 +52,4 @@ async function deleteSessionById (_id) {
     return result;
 }
 
-export { createModel, createSession, getSessions, getSessionById, updateSession, deleteSessionById }
+export { createModel, isDateValid, createSession, getSessions, getSessionById, updateSession, deleteSessionById }

@@ -7,6 +7,7 @@ import AddSongPage from './pages/Songs/AddSongPage/AddSongPage.jsx';
 import EditSongPage from './pages/Songs/EditSongPage/EditSongPage.jsx';
 import PracticeLogPage from './pages/PracticeLog//PracticeLogPage/PracticeLogPage.jsx';
 import AddPracticeLogPage from './pages/PracticeLog/AddPracticeLogPage/AddPracticeLogPage.jsx';
+import EditPracticeLogPage from './pages/PracticeLog/EditPracticeLogPage/EditPracticeLogPage.jsx';
 
 import './App.css'
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/song-library/edit-song' element={ <EditSongPage songToEdit={songToEdit} /> }></Route>
           <Route path = '/practice-log' element={ <PracticeLogPage /> }></Route>
           <Route path = '/practice-log/add-log' element={ <AddPracticeLogPage />}></Route>
+          <Route path = '/practice-log/edit-log' element={ <EditPracticeLogPage />}></Route>
         </Routes>
       </Router>
     </div>

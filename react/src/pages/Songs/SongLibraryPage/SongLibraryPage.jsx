@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { HiPlusCircle } from "react-icons/hi";
 
 import './SongLibraryPage.css';
-
+import Footer from "../../../components/Footer/Footer";
 import SongLibraryItem from "../../../components/SongLibraryItem/SongLibraryItem";
 
 function SongLibraryPage ({ setSongToEdit }) {
@@ -50,9 +50,7 @@ function SongLibraryPage ({ setSongToEdit }) {
                 { songs.map((song, i) => (<SongLibraryItem onEdit={onEdit} song={song} key={i}/>)) }
             </div>
             
-            <footer>
-                Footer
-            </footer>
+            <Footer />
         </div>
     );
 }

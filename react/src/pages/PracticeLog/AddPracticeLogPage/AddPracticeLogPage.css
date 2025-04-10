@@ -1,0 +1,59 @@
+p {
+    display: inline;
+}
+
+#add-options-container {
+    display: inline-flex;
+    flex-direction: column;
+
+    width: 50vw;
+    border: 1px solid purple;
+    margin-top: auto;
+}
+
+input, select {
+    text-align: center;
+}
+
+#routine-ratings-container p {
+    display: flex;
+    margin: 0;
+}
+
+#date-time-container {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+}
+
+#date {
+    width: 75px;
+}
+
+#time, #fun, #development {
+    width: 25px;
+}
+
+#notes {
+    text-align: center;
+    font-size: 16px;
+    height: 50px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#routine-ratings-container {
+    display: flex;
+    border: 1px solid green;
+}
+
+#pl-buttons-container {
+    justify-self: center;
+    margin-top: 25px;
+    width: 20vw;
+    border: 1px solid blue;
+}

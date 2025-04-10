@@ -53,15 +53,3 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
-footer {
-  background-color: #832232;
-  border-top: 2px solid #ECDFCC;
-
-  margin-top: auto;
-
-  width: 100%;
-  height: 100px;
-
-  max-width: 100vw;
-}

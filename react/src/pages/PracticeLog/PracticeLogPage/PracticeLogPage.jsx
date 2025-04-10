@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiPlusCircle } from "react-icons/hi";
 
+import Footer from "../../../components/Footer/Footer.jsx";
 import PracticeSessionTableRow from '../../../components/PracticeSessionTableRow/PracticeSessionTableRow.jsx';
+
+import './PracticeLogPage.css';
 
 function PracticeLogPage () {
     const navigate = useNavigate();
@@ -20,7 +23,7 @@ function PracticeLogPage () {
     }
 
     return (
-        <div>
+        <div id='practice-log-page'>
             <h2>Practice Log</h2>
             
             <table>
@@ -36,9 +39,10 @@ function PracticeLogPage () {
                     </tr>
                 </thead>
                 <tbody>
-                    { rows.map((row, i) => (<PracticeSessionTableRow row={row} key={i}/>)) }
+                    { rows.map((row, i) => (<PracticeSessionTableRow row={row} key={i} onClick={() => navigate('/practice-log/edit-log')}/>)) }
                 </tbody>
             </table>
+        <Footer />
         </div>
     )
 }
